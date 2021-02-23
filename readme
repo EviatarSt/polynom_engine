@@ -16,7 +16,8 @@ possible commands:
 
 		1. SetPolynom: sets a simple polymon, and keeps it in the program's memory.
 		FUNC_NAME will be the name of said function. FUNC_VALUE will be its degree and coefficients
-		(at this point, the program assumes that the degree fits the coefficients. the order is rising: coeff. 0 is of degree 0.)
+		(at this point, the program assumes that the degree fits the coefficients. 
+		the order is rising: coeff. 0 is of degree 0.)
 		
 		2. AddPoint: adds a point to the function, saves it and its function output.
 		FUNC_NAME is the existing function. FUNC_VALUE is the value of the added point.
