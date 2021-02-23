@@ -1,0 +1,32 @@
+this project is for performing a number of actions on polynom functions. the polynoms must be with integer coefficients.
+
+those actions include: multiplting, adding and subtracting different polynoms;also, compositioning functions.
+
+the project will read input from a given file, line by line.
+
+input line will include: FUNC_CMD FUNC_NAME FUNC_VALUE
+
+FUNC_CMD is the name of the command you want to run (details later).
+
+FUNC_NAME is the name of the fitting polynom to the FUNC_CMD
+
+FUNC_VALUE is the parameter/s of the command (multiple parameters are seperated by ',')
+
+possible commands:
+
+		1. SetPolynom: sets a simple polymon, and keeps it in the program's memory.
+		FUNC_NAME will be the name of said function. FUNC_VALUE will be its degree and coefficients
+		(at this point, the program assumes that the degree fits the coefficients. the order is rising: coeff. 0 is of degree 0.)
+		
+		2. AddPoint: adds a point to the function, saves it and its function output.
+		FUNC_NAME is the existing function. FUNC_VALUE is the value of the added point.
+		here too, multiple points are possible.
+		
+		3. MathPolynom: sets a function that is the result of the mathmatical action, performed on 2 given functions
+		FUNC_NAME is the result function; FUNC_VALUE is :(function A),(-/+/*),(function B)
+		
+		4. SetCompfunc: sets a function that is the composition of 2 given functions.
+		FUNC_NAME is the result function; FUNC_VALUE is:(outer function),(inner function)
+		
+		5. Print: prints a given function (its points), or all of them.
+		FUNC_NAME is either the name of the function to print, or "All".
