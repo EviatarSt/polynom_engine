@@ -7,7 +7,7 @@ CCLINK=g++
 LIBS=
 OBJS=main.o func.o polynom.o compfunc.o
 RM=rm -f
-TARGET = WolfraMamat
+TARGET = Polynomer
 
 $(TARGET) : $(OBJS)
 	  $(CCLINK) -o $(TARGET) $(OBJS) $(LIBS)
