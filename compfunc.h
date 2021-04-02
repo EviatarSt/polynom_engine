@@ -11,7 +11,7 @@ public:
  * @brief Ctor of compfunc.
  * parameters: two functions, outer and inner.
  */
-  compfunc(func& outer, func& inner);
+  compfunc(func& outer, func& inner, char* outerName, char* innerName);
 	
   /**
  * @brief Dtor. doesn't need much, compfunc has no allocated memory of its own.
@@ -23,6 +23,10 @@ public:
  */
 	virtual int calculate(int x);
 
+	string* getName();
+
+
+
 protected:
   /**
  * @brief this method will print the compfunc, using the given format.
@@ -33,5 +37,8 @@ protected:
 	func* outer;
 
 	func* inner;
+
+	string FuncProperty;
+
 };
 #endif
