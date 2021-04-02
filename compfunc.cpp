@@ -2,8 +2,10 @@
 
 using namespace std;
 
-compfunc::compfunc(func& outside, func& inside) : 
-func(), outer(&outside), inner(&inside) {}
+compfunc::compfunc(func& outside, func& inside, char* outerName, char* innerName) :
+func(), outer(&outside), inner(&inside), FuncProperty(string(outerName) + "(" + string(innerName) + ")") {
+	id = 2;
+}
 
 compfunc::~compfunc() {}
 
@@ -16,4 +18,8 @@ ostream& compfunc::print(ostream& ro) const{
   ro << endl;
   plot(ro);
 	return ro;
+}
+
+string* compfunc::getName() {
+	return &FuncProperty;
 }
