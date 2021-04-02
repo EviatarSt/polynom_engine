@@ -6,23 +6,36 @@ using namespace std;
 
 polynom::polynom(int order, int* coef_) : 
     func(), n_(order){
+    id = 1;
     coefs_ = new int[n_ + 1];
     for (int i = 0; i <= n_; i++) {
         coefs_[i] = coef_[i];
+    }
+    integ_coefs_ = new double[n_ + 1];
+    for (int i = 0; i <= n_; i++) {
+        this->integ_coefs_[i] = ((double)coefs_[i]) / (i + 1);
     }
 }
 
 
 polynom::polynom(const polynom& OldOne) : 
     func(), n_(OldOne.n_) {
+    id = 1;
     coefs_ = new int[n_ + 1];
     for (int i = 0; i <= n_; i++) {
         coefs_[i] = OldOne.coefs_[i];
     }
+    integ_coefs_ = new double[n_ + 1];
+    for (int i = 0; i <= n_; i++) {
+        this->integ_coefs_[i] = ((double)coefs_[i]) / (i + 1);
+    }
 }
 
 
-polynom::~polynom() { delete[] coefs_; }
+polynom::~polynom() {
+    delete[] coefs_;
+    delete[] integ_coefs_;
+}
 
 
 int polynom::calculate(int x){
@@ -125,33 +138,21 @@ polynom polynom::Derivative() {
     return NewPol;
 }
 
-polynom polynom::Integral() {
-    int* NewCoef = new int[n_ + 2];
-    for (int i = 0; i <= n_; i++) {
-        NewCoef[i + 1] = coefs_[i] / (i+1);
-    }
-    NewCoef[0] = 0;
-    polynom NewPol((n_ + 1), NewCoef);
-    delete[] NewCoef;
-    return NewPol;
-}
 
 ostream& polynom::print(ostream& ro) const {
     polynom* temp = new polynom(*this);
+    polynom* der = new polynom((*temp).Derivative());
     printcoefs(ro);
     ro << endl;
-    polynom* der = new polynom((*temp).Derivative());
-    polynom* Integ = new polynom((*temp).Integral());
     delete temp;
     ro << "Derivative: ";
     (*der).printcoefs(ro);
     ro << endl;
     ro << "Integral: ";
-    (*Integ).printcoefs(ro);
+    (*this).printintegral(ro);
     cout<< "+C" << endl;
     if(fmap_.size() >=1){plot(ro);}
     delete der;
-    delete Integ;
     return ro;
 }
 
@@ -191,4 +192,45 @@ void polynom::printcoefs(ostream& os)  const {
 	continue;
     }
   }
+}
+
+void polynom::printintegral(ostream& os)  const {
+    int allZero = 1;
+    for (auto i = n_; i >= 0; i--) {
+        if (integ_coefs_[i] > 0) {
+            allZero = 0;
+            if (i != n_) {
+                os << "+";
+            }
+            if (integ_coefs_[i] != 1) {
+                os << integ_coefs_[i];
+            }
+            if (i >= 0) {
+                os << "x";
+                if (i >= 1)
+                    os << "^" << (i+1);
+            }
+        }
+        else if (integ_coefs_[i] < 0) {
+            allZero = 0;
+            if (integ_coefs_[i] != -1 || i == 0) {
+                os << integ_coefs_[i];
+            }
+            else
+                os << "-";
+            if (i >= 0) {
+                os << "x";
+                if (i >= 1)
+                    os << "^" << (i+1);
+            }
+        }
+        else if (i == 0 && allZero == 1) { //integ_coefs_[i]==0
+            if (n_ == 0 && integ_coefs_[0] != 0) {
+                os << integ_coefs_[0] << "x";
+                continue;
+            }
+            os << "0";
+            continue;
+        }
+    }
 }
