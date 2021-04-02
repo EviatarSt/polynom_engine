@@ -7,13 +7,14 @@ using std::vector;
 func::func(){
     minVal_ = 100;
     maxVal_ = -100;
+    id = 0;
 }
 
 func::~func(){}
 
 
 
-func& func::operator<<(const int& x) {
+func& func::operator<<(const double& x) {
     int fx = calculate(x);
     fmap_[x] = fx;
     int MapSize = fmap_.size();
