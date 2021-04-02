@@ -22,6 +22,7 @@ class func {
   int minVal_; //minimum of all inputs
   map<int,int> fmap_; //holds inputs and corresponding outputs
   void plot(ostream& os) const ; //plot fmap_
+  int id;
   
 
 public:
@@ -29,7 +30,7 @@ public:
  
   virtual ~func();// the Dtor of the function.
   
-	func& operator<<(const int& x);/* operator override. calculates the value of "fx", 
+	func& operator<<(const double& x);/* operator override. calculates the value of "fx", 
   based on the function, and sets the couple (x, fx) in the map*/
   
 	//opertor override. prints the format of func to the ostream ro.
@@ -40,6 +41,8 @@ public:
  
  //a pure method, to calculate "fx", as mentioned above.
   virtual int calculate(int x)=0;
+
+  int getID() { return id; }
 
 };
 
